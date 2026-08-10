@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krishi Clinic - Plant Disease Detector for Farmers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Krishi Clinic</h1>
+    <p class="tagline">Upload a photo of your plant leaf and we will tell you what disease it has</p>
+  </header>
+  <main>
+    <section class="upload-section">
+      <h2>Step 1: Upload Your Leaf Photo</h2>
+      <div class="upload-box" id="uploadBox">
+        <p>Click here or drag and drop your photo</p>
+        <input type="file" id="leafPhoto" accept="image/*">
+      </div>
+    </section>
+    <section class="farmer-section">
+      <h2>Step 2: Tell Us About Your Crop</h2>
+      <label for="cropName">What is your crop?</label>
+      <select id="cropName">
+        <option value="">-- Select Crop --</option>
+        <option value="tomato">Tomato</option>
+        <option value="wheat">Wheat</option>
+        <option value="rice">Rice</option>
+      </select>
+    </section>
+    <section class="action-section">
+      <button id="analyzeBtn">Analyze My Plant</button>
+    </section>
+  </main>
+  <footer>
+    <p>Made for Indian Farmers | Krishi Clinic 2024</p>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
