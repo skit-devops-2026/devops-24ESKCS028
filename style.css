@@ -58,6 +58,10 @@ h2 {
   position: relative;
 }
 
+.upload-box:hover {
+  background-color: #e8f5e9;
+}
+
 .upload-box input[type="file"] {
   position: absolute;
   top: 0;
@@ -66,6 +70,23 @@ h2 {
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+.upload-box p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.preview-area {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.preview-area img {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 10px;
+  border: 2px solid #4caf50;
 }
 
 label {
