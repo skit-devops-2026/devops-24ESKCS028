@@ -89,6 +89,17 @@ h2 {
   border: 2px solid #4caf50;
 }
 
+#removeBtn {
+  display: block;
+  margin: 10px auto 0;
+  background: none;
+  border: 1px solid #e53935;
+  color: #e53935;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 label {
   display: block;
   margin-bottom: 5px;
