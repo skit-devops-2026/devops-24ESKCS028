@@ -14,4 +14,12 @@ $(document).ready(function () {
       reader.readAsDataURL(file);
     }
   });
+
+  $("#removeBtn").on("click", function () {
+    selectedImageBase64 = "";
+    $("#previewImg").attr("src", "");
+    $("#previewArea").hide();
+    $("#uploadBox").show();
+    $("#leafPhoto").val("");
+  });
 });
