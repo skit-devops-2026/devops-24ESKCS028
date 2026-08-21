@@ -107,13 +107,18 @@ label {
   color: #444;
 }
 
-select {
+select, textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
   margin-bottom: 15px;
+}
+
+textarea {
+  height: 80px;
+  resize: none;
 }
 
 #analyzeBtn {
