@@ -177,6 +177,14 @@ textarea {
   white-space: pre-wrap;
 }
 
+.error-box {
+  background: #ffebee;
+  border-left: 4px solid #e53935;
+  padding: 15px;
+  border-radius: 8px;
+  color: #b71c1c;
+}
+
 footer {
   text-align: center;
   padding: 20px;
