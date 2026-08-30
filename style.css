@@ -185,6 +185,22 @@ textarea {
   color: #b71c1c;
 }
 
+.tips-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tips-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.tips-list li:last-child {
+  border-bottom: none;
+}
+
 footer {
   text-align: center;
   padding: 20px;
