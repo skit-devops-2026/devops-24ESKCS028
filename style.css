@@ -201,6 +201,38 @@ textarea {
   border-bottom: none;
 }
 
+.history-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  background: #fafafa;
+}
+
+.history-item .history-crop {
+  font-weight: bold;
+  color: #2e7d32;
+  margin-bottom: 4px;
+}
+
+.history-item .history-time {
+  color: #999;
+  font-size: 0.75rem;
+  margin-bottom: 6px;
+}
+
+#clearHistoryBtn {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid #e53935;
+  color: #e53935;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
 footer {
   text-align: center;
   padding: 20px;
