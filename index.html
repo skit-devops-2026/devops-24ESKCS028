@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Krishi Clinic - Plant Disease Detector for Farmers</title>
+  <meta name="description" content="Upload your plant leaf photo and get instant AI-powered disease diagnosis. Made for Indian farmers.">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
   <header>
     <h1>Krishi Clinic</h1>
     <p class="tagline">Upload a photo of your plant leaf and we will tell you what disease it has</p>
+    <nav class="navbar">
+      <a href="index.html" class="active">Home</a>
+      <a href="profile.html">My Profile</a>
+      <a href="#" id="navLogoutBtn">Logout</a>
+    </nav>
   </header>
+
   <main>
+
     <section class="upload-section">
       <h2>Step 1: Upload Your Leaf Photo</h2>
+
       <div class="upload-box" id="uploadBox">
         <p>Click here or drag and drop your photo</p>
         <input type="file" id="leafPhoto" accept="image/*">
       </div>
+
       <div class="preview-area" id="previewArea" style="display:none;">
         <img id="previewImg" src="" alt="Your leaf photo">
         <button id="removeBtn">Remove Photo</button>
       </div>
     </section>
+
     <section class="farmer-section">
       <h2>Step 2: Tell Us About Your Crop</h2>
+
       <label for="cropName">What is your crop?</label>
       <select id="cropName">
         <option value="">-- Select Crop --</option>
@@ -36,12 +51,15 @@
         <option value="cotton">Cotton</option>
         <option value="other">Other</option>
       </select>
+
       <label for="extraInfo">Any extra detail (optional):</label>
       <textarea id="extraInfo" placeholder="Example: Leaves are turning yellow, spots on edges..."></textarea>
     </section>
+
     <section class="action-section">
       <button id="analyzeBtn">Analyze My Plant</button>
     </section>
+
     <section class="result-section" id="resultSection" style="display:none;">
       <h2>AI Result</h2>
       <div id="loadingMsg" class="loading" style="display:none;">
@@ -50,6 +68,7 @@
       </div>
       <div id="resultBox" class="result-box"></div>
     </section>
+
     <section class="tips-section">
       <h2>Quick Farmer Tips</h2>
       <ul class="tips-list">
@@ -60,16 +79,23 @@
         <li>Make sure plants get enough sunlight every day</li>
       </ul>
     </section>
+
     <section class="history-section" id="historySection" style="display:none;">
       <h2>Your Recent Scans</h2>
       <div id="historyList"></div>
       <button id="clearHistoryBtn">Clear History</button>
     </section>
+
   </main>
+
   <footer>
     <p>Made for Indian Farmers | Krishi Clinic 2024</p>
   </footer>
+
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="auth.js"></script>
   <script src="app.js"></script>
+
 </body>
+
 </html>
