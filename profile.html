@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Krishi Clinic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>Krishi Clinic</h1>
+    <p class="tagline">Plant Disease Detector for Farmers</p>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="profile.html" class="active">My Profile</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="profile-section">
+      <h2>My Profile</h2>
+
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar"></div>
+        <div class="profile-details">
+          <p><strong>Full Name:</strong> <span id="profileName"></span></p>
+          <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+          <p><strong>Main Crop:</strong> <span id="profileCrop"></span></p>
+          <p><strong>Member Since:</strong> <span id="profileDate"></span></p>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <h3>Your Scan History</h3>
+        <div id="profileHistory">
+          <p class="no-history">You have not scanned any plants yet. <a href="index.html">Scan now</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made for Indian Farmers | Krishi Clinic 2024</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="auth.js"></script>
+
+</body>
+</html>
