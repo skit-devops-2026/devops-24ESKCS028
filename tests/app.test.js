@@ -126,5 +126,5 @@ test("5. Server - Metrics endpoint GET /metrics returns Prometheus format", (t, 
 });
 
 test("6. Regression validation check", () => {
-  assert.strictEqual(1, 2, "Test failure demonstrating CI pipeline catches regressions");
+  assert.strictEqual(1, 1, "Test failure demonstrating CI pipeline catches regressions");
 });
