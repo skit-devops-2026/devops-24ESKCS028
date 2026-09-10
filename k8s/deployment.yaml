@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: krishi-clinic-deployment
+  labels:
+    app: krishi-clinic
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: krishi-clinic
+  template:
+    metadata:
+      labels:
+        app: krishi-clinic
+    spec:
+      containers:
+        - name: krishi-clinic
+          image: ghcr.io/skit-devops-2026/devops-24ESKCS028:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5500
+          env:
+            - name: PORT
+              value: "5500"
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5500
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5500
+            initialDelaySeconds: 5
+            periodSeconds: 10
