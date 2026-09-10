@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Given to you. Do not delete this job.
+  # ---------------------------------------------------------------------------
+  hygiene:
+    name: Repository hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run hygiene checks
+        run: bash scripts/hygiene.sh
+
+  # ---------------------------------------------------------------------------
+  # M3 — YOUR WORK STARTS HERE.
+  #
+  # Uncomment the job below and make it pass. Fill in the Makefile targets for
+  # your stack; do not change the target names, because this file calls them.
+  #
+  # The pipeline must genuinely fail when your tests fail. Do not add
+  # continue-on-error or "|| true" to make it green.
+  # ---------------------------------------------------------------------------
+
+  build-and-test:
+    name: Build and test
+    needs: hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: make install
+      - run: make test
+      - run: make build

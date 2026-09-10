@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "krishi-clinic"
+    static_configs:
+      - targets: ["app:5500", "localhost:5500"]
+    metrics_path: "/metrics"
