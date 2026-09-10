@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: krishi-clinic-service
+  labels:
+    app: krishi-clinic
+spec:
+  type: ClusterIP
+  selector:
+    app: krishi-clinic
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5500
