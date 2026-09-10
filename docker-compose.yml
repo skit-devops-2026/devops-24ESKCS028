@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: krishi-clinic:latest
+    container_name: krishi-clinic-app
+    ports:
+      - "5500:5500"
+    environment:
+      - PORT=5500
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5500/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
