@@ -12,3 +12,4 @@ This repository houses the DevOps configuration and automation pipelines for Kri
 - **Containerization**: Docker multi-stage container image with internal health check.
 - **Orchestration**: Kubernetes Deployment (`k8s/deployment.yaml`) running 2 replicas with active liveness and readiness probes, exposed via ClusterIP Service (`k8s/service.yaml`).
 - **Telemetry & Monitoring**: Prometheus scraping `/metrics` and Grafana monitoring dashboard (`monitoring/dashboard.json`).
+# Kubernetes & Monitoring Setup Verified
