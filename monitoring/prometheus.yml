@@ -2,8 +2,28 @@ global:
   scrape_interval: 15s
   evaluation_interval: 15s
 
+rule_files:
+  - /etc/prometheus/alert-rules.yml
+
 scrape_configs:
+  # The app container, reached by its compose service name.
   - job_name: "krishi-clinic"
+    metrics_path: /metrics
     static_configs:
-      - targets: ["app:5500", "localhost:5500"]
-    metrics_path: "/metrics"
+      - targets: ["app:5500"]
+        labels:
+          env: local
+
+  # The deployed instance on Render. Same /metrics endpoint, over HTTPS.
+  - job_name: "krishi-clinic-production"
+    metrics_path: /metrics
+    scheme: https
+    scrape_interval: 60s
+    static_configs:
+      - targets: ["krishi-clinic-24eskcs028.onrender.com"]
+        labels:
+          env: production
+
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
