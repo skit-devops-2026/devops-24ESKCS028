@@ -1,0 +1,10 @@
+# kind create cluster --name krishi --config k8s/kind-config.yaml
+# Maps the Service's NodePort 30080 to http://localhost:8080 on the host.
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      - containerPort: 30080
+        hostPort: 8080
+        protocol: TCP

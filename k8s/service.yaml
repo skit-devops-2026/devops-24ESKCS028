@@ -5,10 +5,14 @@ metadata:
   labels:
     app: krishi-clinic
 spec:
-  type: ClusterIP
+  # NodePort so the app is reachable from the host on a kind cluster
+  # (see k8s/kind-config.yaml); inside the cluster it is krishi-clinic-service:80.
+  type: NodePort
   selector:
     app: krishi-clinic
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
-      targetPort: 5500
+      targetPort: http
+      nodePort: 30080

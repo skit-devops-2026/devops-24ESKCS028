@@ -6,25 +6,47 @@ metadata:
     app: krishi-clinic
 spec:
   replicas: 2
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: krishi-clinic
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
         app: krishi-clinic
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5500"
+        prometheus.io/path: "/metrics"
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
       containers:
         - name: krishi-clinic
-          image: ghcr.io/skit-devops-2026/devops-24ESKCS028:latest
+          # Image built and pushed by the docker job in .github/workflows/ci.yml
+          image: ghcr.io/skit-devops-2026/devops-24eskcs028:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 5500
+            - name: http
+              containerPort: 5500
           env:
             - name: PORT
               value: "5500"
             - name: NODE_ENV
               value: "production"
+            # Optional: kubectl create secret generic krishi-clinic-secrets --from-literal=GROQ_API_KEY=...
+            - name: GROQ_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: krishi-clinic-secrets
+                  key: GROQ_API_KEY
+                  optional: true
           resources:
             requests:
               memory: "64Mi"
@@ -32,15 +54,18 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "200m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
           livenessProbe:
             httpGet:
               path: /health
-              port: 5500
+              port: http
             initialDelaySeconds: 10
             periodSeconds: 15
           readinessProbe:
             httpGet:
               path: /health
-              port: 5500
-            initialDelaySeconds: 5
+              port: http
+            initialDelaySeconds: 3
             periodSeconds: 10
