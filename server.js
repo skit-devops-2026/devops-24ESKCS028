@@ -6,6 +6,9 @@ const PORT = process.env.PORT || 5500;
 const COMMIT_SHA = process.env.COMMIT_SHA || process.env.GITHUB_SHA || "dev-commit-sha";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const MAX_BODY_BYTES = 8 * 1024 * 1024;
+// The server picks the model so a retired model only needs an env change and
+// visitors cannot spend the API key on arbitrary models.
+const GROQ_MODEL = process.env.GROQ_MODEL || "qwen/qwen3.8-27b";
 
 const MIME_TYPES = {
   ".html": "text/html; charset=UTF-8",
@@ -150,11 +153,19 @@ function handleAnalyze(req, res) {
   });
   req.on("end", async () => {
     if (res.headersSent) return;
+    let payload;
+    try {
+      payload = JSON.parse(Buffer.concat(chunks).toString("utf-8"));
+    } catch (err) {
+      analyzeFailures++;
+      return sendJson(res, 400, { error: { message: "Request body must be JSON" } });
+    }
+    payload.model = GROQ_MODEL;
     try {
       const upstream = await fetch(GROQ_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
-        body: Buffer.concat(chunks)
+        body: JSON.stringify(payload)
       });
       const text = await upstream.text();
       if (!upstream.ok) analyzeFailures++;
