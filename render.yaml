@@ -1,0 +1,17 @@
+# Render Blueprint: New > Blueprint > pick this repository.
+# Builds the Dockerfile on every push to main and serves it at
+# https://krishi-clinic-24eskcs028.onrender.com
+services:
+  - type: web
+    name: krishi-clinic-24eskcs028
+    runtime: docker
+    plan: free
+    branch: main
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GROQ_API_KEY
+        sync: false
