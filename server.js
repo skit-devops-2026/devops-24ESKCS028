@@ -225,6 +225,16 @@ if (require.main === module) {
     console.log(`Health endpoint available at http://localhost:${PORT}/health`);
     console.log(`Metrics endpoint available at http://localhost:${PORT}/metrics`);
   });
+
+  // Docker and Kubernetes stop containers with SIGTERM. Without a handler
+  // Node exits with code 143 and the pod is reported as Error on rollout.
+  for (const signal of ["SIGTERM", "SIGINT"]) {
+    process.on(signal, () => {
+      console.log(`${signal} received, closing server`);
+      server.close(() => process.exit(0));
+      setTimeout(() => process.exit(0), 5000).unref();
+    });
+  }
 }
 
 module.exports = server;
