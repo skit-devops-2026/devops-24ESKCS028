@@ -3,7 +3,9 @@ const fs = require("fs");
 const path = require("path");
 
 const PORT = process.env.PORT || 5500;
-const COMMIT_SHA = process.env.COMMIT_SHA || process.env.GITHUB_SHA || "dev-commit-sha";
+// Docker builds pass COMMIT_SHA; Render sets RENDER_GIT_COMMIT at runtime.
+const COMMIT_SHA = [process.env.COMMIT_SHA, process.env.RENDER_GIT_COMMIT, process.env.GITHUB_SHA]
+  .find((sha) => sha && sha !== "unknown") || "dev-commit-sha";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const MAX_BODY_BYTES = 8 * 1024 * 1024;
 // The server picks the model so a retired model only needs an env change and
