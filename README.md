@@ -2,6 +2,8 @@
 
 A web-based plant disease detection and advisory system built for farmers.
 
+**Live:** https://krishi-clinic-24eskcs028.onrender.com
+
 ## Author
 
 | Roll No. | Name | GitHub username |
@@ -25,7 +27,7 @@ Krishi Clinic is an AI-assisted agricultural web application designed to help fa
 cp .env.example .env        # add your GROQ_API_KEY
 make install
 make test
-GROQ_API_KEY=... make run   # http://localhost:5500
+GROQ_API_KEY=... make run   # serves on port 5500
 ```
 
 The browser never sees the Groq key: the frontend posts to `/api/analyze`
@@ -59,7 +61,7 @@ push to `main`). Useful endpoints on the live app:
 
 ```bash
 GROQ_API_KEY=... make docker-up
-# app http://localhost:5500 · Prometheus http://localhost:9090 · Grafana http://localhost:3000
+# app on port 5500 · Prometheus on port 9090 · Grafana on port 3000 (admin/admin)
 ```
 
 Prometheus scrapes both the local container and the live Render deployment.
@@ -71,7 +73,7 @@ Grafana loads `monitoring/dashboard.json` automatically.
 make kind-up        # kind cluster with NodePort 30080 -> localhost:8080
 make kind-deploy    # build image, load into kind, apply k8s/, wait for rollout
 kubectl get pods
-curl localhost:8080/health
+curl -s 127.0.0.1:8080/health
 ```
 
 Screenshots of the deployment are in [`docs/`](docs/).
