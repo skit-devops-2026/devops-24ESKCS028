@@ -60,7 +60,6 @@ $(document).ready(function () {
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify({
-        model: "meta-llama/llama-4-scout-17b-16e-instruct",
         messages: [
           {
             role: "user",

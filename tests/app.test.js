@@ -192,6 +192,28 @@ test("9. Server - /api/analyze rejects GET and reports missing API key", async (
   }
 });
 
+test("9b. Server - /api/analyze forces the server-side model and rejects bad JSON", async () => {
+  const savedKey = process.env.GROQ_API_KEY;
+  const savedFetch = global.fetch;
+  let sentBody;
+  process.env.GROQ_API_KEY = "test-key";
+  global.fetch = async (url, opts) => {
+    sentBody = JSON.parse(opts.body);
+    return { ok: true, status: 200, text: async () => JSON.stringify({ choices: [{ message: { content: "ok" } }] }) };
+  };
+  try {
+    const bad = await request("POST", "/api/analyze", "not json");
+    assert.strictEqual(bad.status, 400);
+
+    const res = await request("POST", "/api/analyze", JSON.stringify({ model: "some-expensive-model", messages: [] }));
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(sentBody.model, "qwen/qwen3.8-27b", "Client must not choose the model");
+  } finally {
+    global.fetch = savedFetch;
+    if (savedKey === undefined) delete process.env.GROQ_API_KEY; else process.env.GROQ_API_KEY = savedKey;
+  }
+});
+
 test("10. Frontend - no API key is shipped to the browser", () => {
   for (const file of ["app.js", "auth.js", "index.html"]) {
     const src = fs.readFileSync(path.join(BASE_DIR, file), "utf-8");
