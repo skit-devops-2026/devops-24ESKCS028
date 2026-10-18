@@ -1,5 +1,3 @@
-var GROQ_API_KEY = atob("Z3NrXzE1RjVqYnBreEQ4eFJqb2FZNjR0V0dkeWIzRll1aUxGUVZhbHRKTGVacjRkUFlZU21tYw==");
-
 var selectedImageBase64 = "";
 
 $(document).ready(function () {
@@ -57,12 +55,10 @@ $(document).ready(function () {
     $("#analyzeBtn").prop("disabled", true);
 
     $.ajax({
-      url: "https://api.groq.com/openai/v1/chat/completions",
+      // Proxied through server.js so the API key stays on the server
+      url: "api/analyze",
       type: "POST",
       contentType: "application/json",
-      headers: {
-        "Authorization": "Bearer " + GROQ_API_KEY
-      },
       data: JSON.stringify({
         model: "meta-llama/llama-4-scout-17b-16e-instruct",
         messages: [
